@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50% Complete" />
+
+    <Button
+        android:id="@+id/editGoalsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Goals" />
+</LinearLayout>

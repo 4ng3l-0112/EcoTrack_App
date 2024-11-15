@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/challengesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Join the 'Plastic-Free Week' challenge to reduce plastic usage."
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:textColor="@android:color/black" />
+
+    <!-- You can add more TextViews or other UI components here to list more challenges -->
+
+</LinearLayout>
