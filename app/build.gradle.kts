@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.example.ecotrack_app"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -33,6 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {

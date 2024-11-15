@@ -1,36 +1,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="327dp"
+        app:srcCompat="@drawable/chart"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/totalWasteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Waste Tracked: 0 kg" />
+        android:text="Total Waste Tracked: 0 kg"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/quickLogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log Waste" />
+        android:text="Log Waste"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
         android:id="@+id/goalsButton"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        android:text="My Goals" />
+        android:text="My Goals"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
         android:id="@+id/tipsResourcesButton"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        android:text="Tips &amp; Resources" />
+        android:text="Tips &amp; Resources"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
         android:id="@+id/communityChallengesButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Community Challenges" />
+        android:text="Community Challenges"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
+
+
 </LinearLayout>

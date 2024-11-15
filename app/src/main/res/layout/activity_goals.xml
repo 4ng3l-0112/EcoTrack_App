@@ -1,8 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -13,11 +14,13 @@
         android:id="@+id/progressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="50% Complete" />
+        android:text="70% Complete"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/editGoalsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Goals" />
+        android:text="Edit Goals"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
 </LinearLayout>

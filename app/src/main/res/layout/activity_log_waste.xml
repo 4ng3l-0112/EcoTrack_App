@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,28 +9,31 @@
     <Spinner
         android:id="@+id/wasteTypeSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
 
     <Spinner
         android:id="@+id/subcategorySpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
 
     <EditText
         android:id="@+id/notesEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Notes" />
+        android:layout_height="50dp"
+        android:hint="Notes"
+        tools:ignore="Autofill,HardcodedText,TextFields,VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save" />
+        android:text="Save"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel" />
+        android:text="Cancel"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
 </LinearLayout>
