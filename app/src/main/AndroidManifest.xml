@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--suppress ALL -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ecotrack_app">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -9,20 +7,32 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EcoTrack">
+        android:theme="@style/Theme.EcoTrack_App">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Add these for other activities -->
-        <activity android:name="com.example.ecotrack_app.LogWasteActivity" />
-        <activity android:name="com.example.ecotrack_app.TipsResourcesActivity" />
-        <activity android:name="com.example.ecotrack_app.CommunityChallengesActivity" />
-        <activity android:name="com.example.ecotrack_app.GoalsActivity" />
+        <activity
+            android:name=".LogWasteActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".TipsResourcesActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".CommunityChallengesActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".GoalsActivity"
+            android:exported="true" />
 
     </application>
 </manifest>
