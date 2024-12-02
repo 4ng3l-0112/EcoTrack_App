@@ -9,7 +9,7 @@
         android:id="@+id/challengesTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/material_dynamic_neutral_variant40"
+        android:background="@color/white"
         android:padding="10dp"
         android:text="Join the 'Plastic-Free Week' challenge to reduce plastic usage."
         android:textColor="@android:color/black"

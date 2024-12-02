@@ -1,6 +1,7 @@
 package com.example.ecotrack_app
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
@@ -8,6 +9,7 @@ import android.widget.TextView
 
 class TipsResourcesActivity : AppCompatActivity() {
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tips_resources)

@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Waste Tracked: 0 kg"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,TextContrastCheck" />
 
     <Button
         android:id="@+id/quickLogButton"

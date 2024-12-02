@@ -13,7 +13,7 @@ class CommunityChallengesActivity : AppCompatActivity() {
 
         val challengesTextView: TextView = findViewById(R.id.challengesTextView)
 
-// Mock data display for challenges
+
         challengesTextView.text = "Join the 'Plastic-Free Week' challenge to reduce plastic usage."
     }
 }

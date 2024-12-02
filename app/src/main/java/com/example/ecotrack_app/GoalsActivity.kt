@@ -16,7 +16,7 @@ class GoalsActivity : AppCompatActivity() {
         val progressText: TextView = findViewById(R.id.progressText)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
         progressBar.progress = 50 // Example progress value
-        progressText.text = "50% Complete"
+        progressText.text = "70% Complete"
 
         val editGoalsButton: Button = findViewById(R.id.editGoalsButton)
         editGoalsButton.setOnClickListener {
