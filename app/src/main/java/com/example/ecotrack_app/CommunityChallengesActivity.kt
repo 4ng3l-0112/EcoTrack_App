@@ -10,8 +10,14 @@ import android.app.NotificationManager
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import android.os.Build
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CommunityChallengesActivity : AppCompatActivity() {
+    private lateinit var finishedChallengesAdapter: FinishedChallengesAdapter
+    private val finishedChallenges = mutableListOf<FinishedChallenge>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +29,12 @@ class CommunityChallengesActivity : AppCompatActivity() {
         val challengesTextView: TextView = findViewById(R.id.challengesTextView)
         val joinButton: Button = findViewById(R.id.joinChallengeButton)
         val completeButton: Button = findViewById(R.id.completeChallengeButton)
+
+        // Setup RecyclerView
+        val recyclerView: RecyclerView = findViewById(R.id.finishedChallengesRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        finishedChallengesAdapter = FinishedChallengesAdapter(finishedChallenges)
+        recyclerView.adapter = finishedChallengesAdapter
 
         challengesTextView.text = "Current Challenge:\n\nPlastic-Free Week\nReduce your plastic usage for one week and track your progress!\n\nParticipants: 150\nDays Remaining: 5"
 
@@ -36,6 +48,7 @@ class CommunityChallengesActivity : AppCompatActivity() {
         completeButton.setOnClickListener {
             Toast.makeText(this, "Congratulations! You've completed the challenge!", Toast.LENGTH_SHORT).show()
             sendCompletionNotification()
+            addFinishedChallenge("Plastic-Free Week")
         }
     }
 
@@ -73,12 +86,20 @@ class CommunityChallengesActivity : AppCompatActivity() {
     private fun sendCompletionNotification() {
         val builder = NotificationCompat.Builder(this, "CHALLENGE_CHANNEL")
             .setSmallIcon(R.drawable.notification_icon)
-            .setContentTitle("Challenge Completed! 🎉")
+            .setContentTitle("Challenge Completed! ")
             .setContentText("Congratulations! You've successfully completed the Plastic-Free Week challenge!")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(3, builder.build())
+    }
+
+    private fun addFinishedChallenge(challengeName: String) {
+        val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+        val currentDate = dateFormat.format(Date())
+        
+        finishedChallenges.add(0, FinishedChallenge(challengeName, currentDate))
+        finishedChallengesAdapter.updateChallenges(finishedChallenges)
     }
 }
