@@ -11,6 +11,7 @@ import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import android.widget.ImageButton
+import android.widget.EditText
 
 class GoalsActivity : AppCompatActivity() {
     private lateinit var progressText: TextView
