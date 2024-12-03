@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Weekly Waste Reduction"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/goalProgressText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Progress: 90kg / 100kg"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/setGoalButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set New Goal"
+        android:layout_marginBottom="8dp"/>
+
+</LinearLayout>

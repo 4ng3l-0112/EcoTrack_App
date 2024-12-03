@@ -1,55 +1,117 @@
 package com.example.ecotrack_app
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.widget.ProgressBar
-import android.widget.ImageButton
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import android.graphics.Color
 
 class GoalsActivity : AppCompatActivity() {
-
-    private lateinit var progressBars: Map<String, ProgressBar>
+    private lateinit var barChart: BarChart
+    private lateinit var goalProgressText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goals)
 
-        // Initialize back button
-        val backButton: ImageButton = findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            finish()
+        // Enable back button
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        barChart = findViewById(R.id.barChart)
+        goalProgressText = findViewById(R.id.goalProgressText)
+        
+        setupBarChart()
+        loadBarData()
+
+        val setGoalButton: Button = findViewById(R.id.setGoalButton)
+        setGoalButton.setOnClickListener {
+            // TODO: Implement goal setting functionality
         }
-
-        // Initialize progress bars
-        progressBars = mapOf(
-            "monday" to findViewById(R.id.mondayProgress),
-            "tuesday" to findViewById(R.id.tuesdayProgress),
-            "wednesday" to findViewById(R.id.wednesdayProgress),
-            "thursday" to findViewById(R.id.thursdayProgress),
-            "friday" to findViewById(R.id.fridayProgress),
-            "saturday" to findViewById(R.id.saturdayProgress),
-            "sunday" to findViewById(R.id.sundayProgress)
-        )
-
-        // Set progress values (these would normally come from a database)
-        setDailyProgress(mapOf(
-            "monday" to 40,
-            "tuesday" to 60,
-            "wednesday" to 80,
-            "thursday" to 30,
-            "friday" to 50,
-            "saturday" to 70,
-            "sunday" to 90
-        ))
-
-        // Update total progress text
-        val progressText: TextView = findViewById(R.id.progressText)
-        progressText.text = "150/300"
     }
 
-    private fun setDailyProgress(progressValues: Map<String, Int>) {
-        progressValues.forEach { (day, progress) ->
-            progressBars[day]?.progress = progress
+    private fun setupBarChart() {
+        barChart.apply {
+            description.isEnabled = false
+            setDrawGridBackground(false)
+            setDrawBarShadow(false)
+            setDrawValueAboveBar(true)
+            setPinchZoom(false)
+            setScaleEnabled(false)
+            
+            // Customize X axis
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
+                setDrawGridLines(false)
+                granularity = 1f
+                valueFormatter = IndexAxisValueFormatter(getDaysOfWeek())
+                textSize = 12f
+            }
+            
+            // Customize left axis
+            axisLeft.apply {
+                setDrawGridLines(true)
+                setDrawZeroLine(true)
+                setDrawLimitLinesBehindData(true)
+                axisMinimum = 0f
+                textSize = 12f
+            }
+            
+            // Customize right axis
+            axisRight.isEnabled = false
+            
+            // Customize legend
+            legend.isEnabled = false
+            
+            // Add animation
+            animateY(1000)
         }
+    }
+
+    private fun loadBarData() {
+        val entries = ArrayList<BarEntry>().apply {
+            add(BarEntry(0f, 11f)) // Monday
+            add(BarEntry(1f, 13f)) // Tuesday
+            add(BarEntry(2f, 15f)) // Wednesday
+            add(BarEntry(3f, 10f)) // Thursday
+            add(BarEntry(4f, 12f)) // Friday
+            add(BarEntry(5f, 14f)) // Saturday
+            add(BarEntry(6f, 15f)) // Sunday
+        }
+
+        val dataSet = BarDataSet(entries, "Daily Waste").apply {
+            color = Color.parseColor("#00796B") // Material Design Teal
+            valueTextSize = 12f
+            valueTextColor = Color.BLACK
+        }
+
+        val data = BarData(dataSet).apply {
+            barWidth = 0.7f
+        }
+
+        barChart.data = data
+        barChart.invalidate()
+    }
+
+    private fun getDaysOfWeek(): ArrayList<String> {
+        return ArrayList<String>().apply {
+            add("M")
+            add("T")
+            add("W")
+            add("Th")
+            add("F")
+            add("Sat")
+            add("Sun")
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

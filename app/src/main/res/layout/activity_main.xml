@@ -1,46 +1,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/background_color">
+    tools:context=".MainActivity">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="327dp"
-        app:srcCompat="@drawable/chart"
-        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/totalWasteTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total Waste Tracked: 0 kg"
-        tools:ignore="HardcodedText,TextContrastCheck" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        tools:text="Total Waste Tracked: 150 kg" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"/>
+
 
     <Button
         android:id="@+id/quickLogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log Waste"
+        android:text="Quick Log"
+        android:layout_marginBottom="8dp"
         tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
         android:id="@+id/goalsButton"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:text="My Goals"
+        android:layout_height="wrap_content"
+        android:text="Goals"
+        android:layout_marginBottom="8dp"
         tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
         android:id="@+id/tipsResourcesButton"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:text="Tips &amp; Resources"
+        android:layout_height="wrap_content"
+        android:text="Tips and Resources"
+        android:layout_marginBottom="8dp"
         tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
@@ -48,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Community Challenges"
+        android:layout_marginBottom="8dp"
         tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     <Button
@@ -55,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Waste History"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginBottom="8dp"/>
 
 
 </LinearLayout>
