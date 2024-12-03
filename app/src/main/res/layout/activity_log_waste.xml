@@ -1,39 +1,79 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Waste"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waste Type:"
+        android:layout_marginBottom="8dp"/>
+
     <Spinner
         android:id="@+id/wasteTypeSpinner"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
 
-    <Spinner
-        android:id="@+id/subcategorySpinner"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight (kg):"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/weightEditText"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Enter weight in kg"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes:"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/notesEditText"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Notes"
-        tools:ignore="Autofill,HardcodedText,TextFields,VisualLintTextFieldSize" />
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:hint="Add any notes here"
+        android:gravity="top"
+        android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/saveButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        tools:ignore="HardcodedText,VisualLintButtonSize" />
+        android:orientation="horizontal"
+        android:gravity="end">
 
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        tools:ignore="HardcodedText,VisualLintButtonSize" />
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"/>
+    </LinearLayout>
+
 </LinearLayout>
