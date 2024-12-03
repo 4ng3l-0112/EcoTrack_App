@@ -76,7 +76,11 @@ class GoalsActivity : AppCompatActivity() {
         // Calculate current progress (sum of all bar values)
         val currentProgress = barChart.data?.let { data ->
             data.dataSets.firstOrNull()?.let { dataSet ->
-                dataSet.values.sumOf { it.y.toDouble() }
+                var sum = 0.0
+                for (i in 0 until dataSet.entryCount) {
+                    sum += dataSet.getEntryForIndex(i).y.toDouble()
+                }
+                sum
             }
         } ?: 0.0
 
