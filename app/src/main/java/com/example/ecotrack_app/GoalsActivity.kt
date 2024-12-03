@@ -3,6 +3,7 @@ package com.example.ecotrack_app
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -11,10 +12,15 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import android.graphics.Color
+import androidx.appcompat.app.AlertDialog
+import android.view.LayoutInflater
+import android.text.InputType
+import android.widget.Toast
 
 class GoalsActivity : AppCompatActivity() {
     private lateinit var barChart: BarChart
     private lateinit var goalProgressText: TextView
+    private var currentGoal: Int = 100 // Default goal value
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +34,53 @@ class GoalsActivity : AppCompatActivity() {
         
         setupBarChart()
         loadBarData()
+        updateGoalProgress()
 
         val setGoalButton: Button = findViewById(R.id.setGoalButton)
         setGoalButton.setOnClickListener {
-            // TODO: Implement goal setting functionality
+            showSetGoalDialog()
         }
+    }
+
+    private fun showSetGoalDialog() {
+        val input = EditText(this).apply {
+            inputType = InputType.TYPE_CLASS_NUMBER
+            hint = "Enter goal in kg"
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Set New Goal")
+            .setView(input)
+            .setPositiveButton("Set") { dialog, _ ->
+                try {
+                    val newGoal = input.text.toString().toInt()
+                    if (newGoal > 0) {
+                        currentGoal = newGoal
+                        updateGoalProgress()
+                        Toast.makeText(this, "Goal updated successfully!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Please enter a value greater than 0", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show()
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.cancel()
+            }
+            .show()
+    }
+
+    private fun updateGoalProgress() {
+        // Calculate current progress (sum of all bar values)
+        val currentProgress = barChart.data?.let { data ->
+            data.dataSets.firstOrNull()?.let { dataSet ->
+                dataSet.values.sumOf { it.y.toDouble() }
+            }
+        } ?: 0.0
+
+        goalProgressText.text = "Current Progress: ${currentProgress.toInt()}kg / ${currentGoal}kg"
     }
 
     private fun setupBarChart() {
