@@ -24,6 +24,9 @@ class LogWasteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_waste)
 
+        // Enable back button in action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val wasteTypeSpinner: Spinner = findViewById(R.id.wasteTypeSpinner)
         val notesEditText: EditText = findViewById(R.id.notesEditText)
         val weightEditText: EditText = findViewById(R.id.weightEditText)
@@ -112,5 +115,10 @@ class LogWasteActivity : AppCompatActivity() {
 
         val notificationManager = NotificationManagerCompat.from(this)
         notificationManager.notify(1, notificationBuilder.build())
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -25,6 +25,9 @@ class WasteHistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_waste_history)
 
+        // Enable back button in action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         recyclerView = findViewById(R.id.wasteHistoryRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         
@@ -37,6 +40,11 @@ class WasteHistoryActivity : AppCompatActivity() {
         
         adapter = WasteHistoryAdapter(sampleData)
         recyclerView.adapter = adapter
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
 

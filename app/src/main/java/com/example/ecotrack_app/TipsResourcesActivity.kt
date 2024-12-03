@@ -14,10 +14,18 @@ class TipsResourcesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tips_resources)
 
+        // Enable back button in action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val searchEditText: EditText = findViewById(R.id.searchEditText)
         val articleTextView: TextView = findViewById(R.id.articleTextView)
 
         // Mock data display for the articles
         articleTextView.text = "Reducing Plastic Waste: Tips on minimizing plastic usage."
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

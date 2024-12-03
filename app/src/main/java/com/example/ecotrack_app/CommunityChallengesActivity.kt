@@ -17,6 +17,9 @@ class CommunityChallengesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_challenges)
 
+        // Enable back button in action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val challengesTextView: TextView = findViewById(R.id.challengesTextView)
         val joinButton: Button = findViewById(R.id.joinChallengeButton)
 
@@ -28,6 +31,11 @@ class CommunityChallengesActivity : AppCompatActivity() {
             Toast.makeText(this, "You've joined the Plastic-Free Week challenge!", Toast.LENGTH_SHORT).show()
             sendChallengeNotification()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun createNotificationChannel() {
