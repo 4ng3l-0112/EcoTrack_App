@@ -22,6 +22,7 @@ class CommunityChallengesActivity : AppCompatActivity() {
 
         val challengesTextView: TextView = findViewById(R.id.challengesTextView)
         val joinButton: Button = findViewById(R.id.joinChallengeButton)
+        val completeButton: Button = findViewById(R.id.completeChallengeButton)
 
         challengesTextView.text = "Current Challenge:\n\nPlastic-Free Week\nReduce your plastic usage for one week and track your progress!\n\nParticipants: 150\nDays Remaining: 5"
 
@@ -30,6 +31,11 @@ class CommunityChallengesActivity : AppCompatActivity() {
         joinButton.setOnClickListener {
             Toast.makeText(this, "You've joined the Plastic-Free Week challenge!", Toast.LENGTH_SHORT).show()
             sendChallengeNotification()
+        }
+
+        completeButton.setOnClickListener {
+            Toast.makeText(this, "Congratulations! You've completed the challenge!", Toast.LENGTH_SHORT).show()
+            sendCompletionNotification()
         }
     }
 
@@ -62,5 +68,17 @@ class CommunityChallengesActivity : AppCompatActivity() {
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(2, builder.build())
+    }
+
+    private fun sendCompletionNotification() {
+        val builder = NotificationCompat.Builder(this, "CHALLENGE_CHANNEL")
+            .setSmallIcon(R.drawable.notification_icon)
+            .setContentTitle("Challenge Completed! 🎉")
+            .setContentText("Congratulations! You've successfully completed the Plastic-Free Week challenge!")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(3, builder.build())
     }
 }
