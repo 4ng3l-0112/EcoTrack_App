@@ -32,6 +32,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".WasteHistoryActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".GoalsActivity"
             android:exported="true" />
 

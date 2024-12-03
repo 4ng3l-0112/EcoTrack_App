@@ -36,5 +36,10 @@ class MainActivity : AppCompatActivity() {
         communityChallengesButton.setOnClickListener {
             startActivity(Intent(this, CommunityChallengesActivity::class.java))
         }
+
+        val viewHistoryButton: Button = findViewById(R.id.viewHistoryButton)
+        viewHistoryButton.setOnClickListener {
+            startActivity(Intent(this, WasteHistoryActivity::class.java))
+        }
     }
 }
