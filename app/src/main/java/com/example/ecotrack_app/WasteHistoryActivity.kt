@@ -8,16 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ImageView
 import java.text.SimpleDateFormat
 import java.util.*
+import org.json.JSONArray
+import android.graphics.BitmapFactory
+import android.util.Base64
+import kotlinx.coroutines.*
 
-data class WasteEntry(
-    val type: String,
-    val amount: Double,
-    val date: Date
-)
-
-class WasteHistoryActivity : AppCompatActivity() {
+class WasteHistoryActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: WasteHistoryAdapter
 
@@ -31,30 +30,60 @@ class WasteHistoryActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.wasteHistoryRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         
-        // TODO: Replace this with actual data from your database
-        val sampleData = listOf(
-            WasteEntry("Plastic", 0.5, Date()),
-            WasteEntry("Paper", 1.0, Date()),
-            WasteEntry("Glass", 0.75, Date())
-        )
+        launch {
+            val entries = loadWasteEntries()
+            adapter = WasteHistoryAdapter(entries)
+            recyclerView.adapter = adapter
+        }
+    }
+
+    private suspend fun loadWasteEntries(): List<WasteEntry> = withContext(Dispatchers.IO) {
+        val sharedPref = getSharedPreferences("waste_logs", MODE_PRIVATE)
+        val logsStr = sharedPref.getString("logs", "[]") ?: "[]"
+        val logsArray = JSONArray(logsStr)
         
-        adapter = WasteHistoryAdapter(sampleData)
-        recyclerView.adapter = adapter
+        val entries = mutableListOf<WasteEntry>()
+        for (i in 0 until logsArray.length()) {
+            val log = logsArray.getJSONObject(i)
+            entries.add(
+                WasteEntry(
+                    type = log.getString("type"),
+                    amount = log.getDouble("amount"),
+                    date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                        .parse(log.getString("date")) ?: Date(),
+                    photoBase64 = log.optString("photo", null)
+                )
+            )
+        }
+        entries.reversed() // Show newest entries first
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel() // Cancel all coroutines
+    }
 }
 
-class WasteHistoryAdapter(private val wasteEntries: List<WasteEntry>) : 
+data class WasteEntry(
+    val type: String,
+    val amount: Double,
+    val date: Date,
+    val photoBase64: String? = null
+)
+
+class WasteHistoryAdapter(private var wasteEntries: List<WasteEntry>) :
     RecyclerView.Adapter<WasteHistoryAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val wasteTypeTextView: TextView = view.findViewById(R.id.wasteTypeTextView)
         val wasteAmountTextView: TextView = view.findViewById(R.id.wasteAmountTextView)
         val wasteDateTextView: TextView = view.findViewById(R.id.wasteDateTextView)
+        val wastePhotoThumbnail: ImageView = view.findViewById(R.id.wastePhotoThumbnail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -70,7 +99,26 @@ class WasteHistoryAdapter(private val wasteEntries: List<WasteEntry>) :
         
         val dateFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
         holder.wasteDateTextView.text = dateFormat.format(entry.date)
+
+        // Load photo if available
+        entry.photoBase64?.let { base64String ->
+            try {
+                val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                holder.wastePhotoThumbnail.setImageBitmap(bitmap)
+                holder.wastePhotoThumbnail.visibility = View.VISIBLE
+            } catch (e: Exception) {
+                holder.wastePhotoThumbnail.visibility = View.GONE
+            }
+        } ?: run {
+            holder.wastePhotoThumbnail.visibility = View.GONE
+        }
     }
 
     override fun getItemCount() = wasteEntries.size
+
+    fun updateEntries(newEntries: List<WasteEntry>) {
+        wasteEntries = newEntries
+        notifyDataSetChanged()
+    }
 }
