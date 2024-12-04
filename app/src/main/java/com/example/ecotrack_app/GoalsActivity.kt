@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import java.util.ArrayList
+import kotlin.collections.sumOf
 
 class GoalsActivity : AppCompatActivity() {
     private lateinit var goalProgressText: TextView
